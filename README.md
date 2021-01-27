@@ -24,7 +24,7 @@ https://youtu.be/vSZyMilgcuU
 ### Thank to
 
 IllidanS4 for [i_quat].
-Zeex for [amx_assembly]
+Zeex for [amx_assembly].
 
 I had created Matrix_BuildUp in this way: (code in C ++, before converting to Pawn code)
 
@@ -41,7 +41,7 @@ void matrix_t::BuildUp()
 	
 	matrix2.SetRotation(rotation.X, rotation.Y, rotation.Z);
 	
-	if(matrix.right != matrix2.right || matrix.front != matrix2.front)
+	if(right != matrix2.right || front != matrix2.front)
 	{
 		matrix1.up.Z = -1.0;
 		rotation = matrix1.GetRotation();
