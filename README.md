@@ -2,7 +2,7 @@
 
 https://youtu.be/vSZyMilgcuU
 
-### Functions
+### Functions ([matrix.inc])
 
 | return | function |
 | ------ | ------ |
@@ -20,39 +20,45 @@ https://youtu.be/vSZyMilgcuU
 | VECTOR | Matrix_GetOffsetPosition(const matrix[MATRIX], const vector[VECTOR]); |
 | VECTOR | Matrix_GetOffsetRotation(const matrix[MATRIX], const vector[VECTOR], bool:invert = true); |
 
+### Functions ([matrix_example.inc])
+
+| return | function |
+| ------ | ------ |
+| MATRIX | GetVehicleMatrix(vehicleid); |
+| | SetVehicleMatrix(vehicleid, mat[MATRIX]); |
+| VECTOR | GetVehicleRot(vehicleid); |
+| | SetVehicleRot(vehicleid, rot[VECTOR]); |
+| MATRIX | GetVehicleVelocityFrontVector(vehicleid) |
+| | SetVehicleVelocityFrontVector(vehicleid, vec[VECTOR]); |
+
+### Commands ([matrix_example1.pwn])
+
+| command | description  |
+| ------ | ------ |
+| /matrix | Start/Stop comparison between matrix, attach and i_quat |
+| /attach | Attach object to vehicle, with predefined offset |
+| /attach_calc_offset | Attach object to vehicle, automatically calc offset |
+| /detach | detach object from vehicle |
+
+### Commands ([matrix_example2.pwn])
+
+| command | description  |
+| ------ | ------ |
+| /getvrot | Example of GetVehicleRot |
+| /setvrot | Example of SetVehicleRot |
+| /boost | Example of SetVehicleVelocityFrontVector  |
+| /turbo | Same result as /boost |
 
 ### Thank to
 
-IllidanS4 for [i_quat].
-Zeex for [amx_assembly].
+IllidanS4 for [i_quat], It allowed me to create the Matrix_BuildUp function based on GetVehicleRotationQuatFixed.<br />
+Zeex for [amx_assembly], it allowed me to create the GetVehicleMatrix and SetVehicleMarix function. Thanks for that.<br />
+katursis for [Pawn.RakNet], it allowed me to create the SetVehicleMarix function. Thanks for that.<br />
 
-I had created Matrix_BuildUp in this way: (code in C ++, before converting to Pawn code)
-
-```C++
-void matrix_t::BuildUp()
-{
-	matrix_t matrix1;
-	matrix_t matrix2;
-	
-	matrix1 = *this;
-	matrix1.up.Z = 1.0;
-	
-	vector_t rotation = matrix1.GetRotation();
-	
-	matrix2.SetRotation(rotation.X, rotation.Y, rotation.Z);
-	
-	if(right != matrix2.right || front != matrix2.front)
-	{
-		matrix1.up.Z = -1.0;
-		rotation = matrix1.GetRotation();
-	}
-	
-	SetRotation(rotation.X, rotation.Y, rotation.Z);
-}
-```
-But then I found out the way i_quat did it, and I preferred to use that solution. Thanks for that.
-
-Also by amx_assembly, it allowed me to create the GetVehicleMatrix function. This function is inside the filterscript, and is not part of the include. It is only available as a test and example to use the include functions. Thanks for that.
-
+[matrix.inc]: <https://github.com/Leonardo541/matrix/blob/main/include/matrix.inc>
+[matrix_example.inc]: <https://github.com/Leonardo541/matrix/blob/main/filterscripts/matrix_example.inc>
+[matrix_example1.pwn]: <https://github.com/Leonardo541/matrix/blob/main/filterscripts/matrix_example1.pwn>
+[matrix_example2.pwn]: <https://github.com/Leonardo541/matrix/blob/main/filterscripts/matrix_example2.pwn>
 [i_quat]: <https://github.com/IllidanS4/i_quat>
 [amx_assembly]: <https://github.com/Zeex/amx_assembly>
+[Pawn.RakNet]: <https://github.com/katursis/Pawn.RakNet>
