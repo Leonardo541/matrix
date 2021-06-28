@@ -28,7 +28,7 @@ https://youtu.be/vSZyMilgcuU
 | | SetVehicleMatrix(vehicleid, mat[MATRIX]); |
 | VECTOR | GetVehicleRot(vehicleid); |
 | | SetVehicleRot(vehicleid, rot[VECTOR]); |
-| MATRIX | GetVehicleVelocityFrontVector(vehicleid) |
+| VECTOR | GetVehicleVelocityFrontVector(vehicleid) |
 | | SetVehicleVelocityFrontVector(vehicleid, vec[VECTOR]); |
 
 ### Commands ([matrix_example1.pwn])
